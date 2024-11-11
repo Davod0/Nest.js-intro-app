@@ -5,11 +5,14 @@ import {
   FindStudentsResponseDto,
   StudentsResponseDto,
 } from './dto/student.dto';
+import { StudentService } from './student.service';
 @Controller('students')
 export class StudentController {
+  constructor(private readonly studentService: StudentService) {}
+
   @Get()
   getStudents(): FindStudentsResponseDto[] {
-    return 'All students';
+    return this.studentService.getStudents();
   }
 
   @Get('/:studentId')

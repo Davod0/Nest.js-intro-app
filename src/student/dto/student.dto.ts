@@ -14,7 +14,7 @@ export class FindStudentsResponseDto {
   teacher: string;
 }
 
-export class StudentsResponseDto {
+export class StudentResponseDto {
   id: string;
   name: string;
   teacher: string;

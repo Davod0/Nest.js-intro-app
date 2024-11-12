@@ -1,5 +1,5 @@
 import { Controller, Get, Put,Param } from '@nestjs/common';
-import { FindStudentsResponseDto, StudentsResponseDto } from '../student/dto/student.dto';
+import { FindStudentsResponseDto, StudentResponseDto } from '../student/dto/student.dto';
 @Controller('teachers/:teacherId/students')
 export class StudentTeacherController {
 
@@ -14,7 +14,7 @@ export class StudentTeacherController {
   updateStudentTeacher(
     @Param('teacherId') teacherId: string
     @Param('studentId') studentId: string
-  ):StudentsResponseDto {
+  ):StudentResponseDto {
     return `Update student with ID ${studentId} that belongs to a teacher with ID ${teacherId}`;
   }
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { FindTeacherResponseDto } from './dto/teacher.dto';
 
 @Injectable()
-export class TeaherService {
+export class TeacherService {
   private teachers = teachers;
 
   getTeacherS(): FindTeacherResponseDto[] {

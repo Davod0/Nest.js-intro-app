@@ -20,12 +20,12 @@ export class StudentController {
     @Param('studentId') studentId: string,
   ): FindStudentsResponseDto {
     console.log(studentId);
-    return this.getStudentById(studentId);
+    return this.studentService.getStudentById(studentId);
   }
 
   @Post()
   createStudent(@Body() body: CreateStudentDto): StudentResponseDto {
-    return this.createStudent(body);
+    return this.studentService.createStudent(body);
   }
 
   @Put('/:studentId')
@@ -35,4 +35,5 @@ export class StudentController {
   ): StudentResponseDto {
     return this.studentService.updateStudent(body, studentId);
   }
+  
 }

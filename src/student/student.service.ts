@@ -7,6 +7,7 @@ import {
   UpdateStudentDto,
 } from './dto/student.dto';
 import { v4 as uuid } from 'uuid';
+import { FindTeacherResponseDto } from 'src/teacher/dto/teacher.dto';
 
 @Injectable()
 export class StudentService {
@@ -16,9 +17,9 @@ export class StudentService {
     return this.students;
   }
 
-  getStudentById(studentId: string): FindStudentsResponseDto {
+  getStudentById(id: string): FindStudentsResponseDto {
     return this.students.find((student) => {
-      return student.id === studentId;
+      return student.id === id;
     });
   }
 
@@ -31,15 +32,16 @@ export class StudentService {
     return newStudent;
   }
 
-  updateStudent(payload: UpdateStudentDto, studentId: string): StudentResponseDto {
+  updateStudent(payload: UpdateStudentDto, id: string): StudentResponseDto {
     let updatedStudent: StudentResponseDto;
 
     let updatedStudentList = this.students.map((student) => {
-      if (student.id === studentId) {
+      if (student.id === id) {
         updatedStudent = {
-          id: studentId,
+          id,
           ...payload,
         };
+        return updatedStudent;
       } else return student;
     });
 
@@ -47,4 +49,29 @@ export class StudentService {
 
     return updatedStudent;
   }
+
+  getStudentsByTeacherId(teacherId: string): FindStudentsResponseDto[] {
+    return this.students.filter((student) => {
+      return student.teacher === teacherId;
+    });
+  }
+
+
+  updateStudentTeacher(teacherId: string, studentId: string): StudentResponseDto {
+    let updatedStudent: StudentResponseDto
+
+    let updatedStudentList = this.students.map(student => {
+        if(student.id === studentId){
+            updatedStudent = {
+                ...student,
+                teacher: teacherId
+            };
+            return updatedStudent
+        } else return student
+    });
+
+    this.students = updatedStudentList
+
+    return updatedStudent
+}
 }
